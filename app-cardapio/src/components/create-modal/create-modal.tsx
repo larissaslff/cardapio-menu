@@ -7,6 +7,7 @@ import './create-modal.css'
 interface InputProps {
     label: string,
     value: string | number,
+    required: boolean,
     updateValue(value: any): void
 
 }
@@ -15,11 +16,11 @@ interface ModalProps {
     closeModal(): void
 }
 
-const Input = ({ label, value, updateValue }: InputProps) => {
+const Input = ({ label, value, updateValue, required }: InputProps) => {
     return (
         <>
             <label>{label}</label>
-            <input value={value} onChange={e => updateValue(e.target.value)}></input>
+            <input value={value} onChange={e => updateValue(e.target.value)} required={required}/>
         </>
     )
 }
@@ -55,12 +56,12 @@ export function CreateModal({ closeModal }: ModalProps) {
                         <AiFillCloseCircle className="close" onClick={closeModal} size={24} />
                     </div>
                 </div>
-                <form className="input-container">
-                    <Input label="Título" value={title} updateValue={setTitle} />
-                    <Input label="Preço" value={price} updateValue={setPrice} />
-                    <Input label="Imagem" value={image} updateValue={setImage} />
+                <form className="input-container" onSubmit={submit}>
+                    <Input required label="Título" value={title} updateValue={setTitle} />
+                    <Input required label="Preço" value={price} updateValue={setPrice} />
+                    <Input required label="Imagem" value={image} updateValue={setImage} />
+                    <button className="btn-secondary">Adicionar</button>
                 </form>
-                <button onClick={submit} className="btn-secondary">Adicionar</button>
             </div>
         </div>
     )
