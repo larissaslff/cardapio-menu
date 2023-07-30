@@ -8,6 +8,8 @@ interface InputProps {
     label: string,
     value: string | number,
     required: boolean,
+    type: string,
+    maxlength: number,
     updateValue(value: any): void
 
 }
@@ -16,11 +18,11 @@ interface ModalProps {
     closeModal(): void
 }
 
-const Input = ({ label, value, updateValue, required }: InputProps) => {
+const Input = ({ label, value, updateValue, required, type, maxlength }: InputProps) => {
     return (
         <>
             <label>{label}</label>
-            <input value={value} onChange={e => updateValue(e.target.value)} required={required}/>
+            <input type={type} value={value} maxLength={maxlength} onChange={e => updateValue(e.target.value)} required={required} />
         </>
     )
 }
@@ -57,9 +59,9 @@ export function CreateModal({ closeModal }: ModalProps) {
                     </div>
                 </div>
                 <form className="input-container" onSubmit={submit}>
-                    <Input required label="Título" value={title} updateValue={setTitle} />
-                    <Input required label="Preço" value={price} updateValue={setPrice} />
-                    <Input required label="Imagem" value={image} updateValue={setImage} />
+                    <Input maxlength={250} type='text' required label="Título" value={title} updateValue={setTitle} />
+                    <Input maxlength={10} type='number' required label="Preço" value={price} updateValue={setPrice} />
+                    <Input maxlength={250} type='text' required label="Imagem" value={image} updateValue={setImage}/>
                     <button className="btn-secondary">Adicionar</button>
                 </form>
             </div>
