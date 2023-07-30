@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useFoodDataMutate } from '../../hooks/useFoodDataMutate';
 import { FoodData } from '../../interface/FoodData';
+import { AiFillCloseCircle } from 'react-icons/ai'
 import './create-modal.css'
 
 interface InputProps {
@@ -48,7 +49,12 @@ export function CreateModal({ closeModal }: ModalProps) {
     return (
         <div className="modal-overlay">
             <div className="modal-body">
-                <h2>Cadastrar novo item</h2>
+                <div className="header">
+                    <h2>Cadastrar novo item</h2>
+                    <div className="close">
+                        <AiFillCloseCircle className="close" onClick={closeModal} size={24} />
+                    </div>
+                </div>
                 <form className="input-container">
                     <Input label="Título" value={title} updateValue={setTitle} />
                     <Input label="Preço" value={price} updateValue={setPrice} />
